@@ -22,13 +22,21 @@ public class MainController {
         return "home";
     }
     @GetMapping("/register")
-    public String registerGet() {
+    public String registerGet(Model model) {
         return "register";
     }
     @PostMapping("/register")
-    public String registerPost(@RequestParam String email, @RequestParam String username, @RequestParam String password){
-     userService.registerUser(username,password,email);
-     return("login");
+    public String registerPost(@RequestParam String email, @RequestParam String username, @RequestParam String password,@RequestParam String role, Model model){
+     int errorCheck = userService.registerUser(username,password,email,role);
+     switch (errorCheck){
+         case(-1): model.addAttribute("error", "E-mail занят!");
+                break;
+         case(-2): model.addAttribute("error", "Имя пользовтеля занято!");
+             break;
+         default:
+             model.addAttribute("error", "Успешная регистрация! Письмо с инструкцией активации отправлено!");
+     }
+     return("register");
     }
     @GetMapping("/confirmRegistration/{activationCode}")
     public String confirmRegistration( @PathVariable String activationCode, Model model) {

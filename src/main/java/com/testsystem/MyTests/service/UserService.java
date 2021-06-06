@@ -34,13 +34,16 @@ public class UserService implements UserDetailsService {
             return u;
         }
     }
-    public void registerUser(String username, String password, String email){
+    public int registerUser(String username, String password, String email, String role){
+        if(userRepository.findByEmail(email)!=null) return -1;
+        if(userRepository.findByEmail(email)!=null) return -2;
         User u = new User(username, bCryptPasswordEncoder.encode(password), email);
         u.setActivated(false);
         u.setActivationCode(UUID.randomUUID().toString());
         emailService.sendActivationUrl(u);
-        u.setRole(Collections.singleton(new Role()));
+        u.setRole(Collections.singleton(new Role(role)));
         userRepository.save(u);
+        return 0;
     }
     public boolean confirmRegistration(String activationCode){
        User u = userRepository.findByActivationCode(activationCode);

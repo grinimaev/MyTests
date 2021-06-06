@@ -7,11 +7,14 @@
 <body>
 <form th:action="@{/register}" method="post">
     <span th:text="${msg}"></span>
+    <span th:text="${error}"></span>
   <div><label> E-mail : <input type="email" name="email"/> </label></div>
   <div><label> User Name : <input type="text" name="username"/> </label></div>
   <div><label> Password: <input type="password" name="password"/> </label></div>
+    <label><input type="radio" checked="checked" name="role" value="user"> Пользователь</label>
+    <label><input type="radio" name="role" value="tester"> Тестер</label>
 <!--    <input type="hidden" name="_csrf" value="{{_csrf.token}}">-->
-  <div><input type="submit" value="Sign In"/></div>
+  <div><input type="submit" value="Register"/></div>
 </form>
 </body>
 </html>

@@ -45,7 +45,7 @@ public class UserService implements UserDetailsService {
     public boolean confirmRegistration(String activationCode){
        User u = userRepository.findByActivationCode(activationCode);
        if(u!=null) {
-           u.setActivated(true);
+           u.setActivated(true);//test git
            u.setActivationCode(null);
            userRepository.save(u);
            return true;

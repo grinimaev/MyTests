@@ -2,8 +2,7 @@
     margin: 0;
     padding: 0;
 }
-
-
+/*Шапка*/
 header{
     width: 100%;
     height: 100px;
@@ -85,6 +84,7 @@ a:hover{
     color: #2c3e50;
     cursor: pointer;
 }
+/*Логин и регистрация*/
 .regina{
     margin-top: 30px;
     margin-left: auto;
@@ -181,6 +181,6 @@ a:hover{
     margin-top: 10px;
 }
 
-
+/*...*/
 
 

@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class User implements UserDetails {
@@ -26,9 +26,13 @@ public class User implements UserDetails {
     private boolean isActivated;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> role;
+    private List<Role> role;
 
-    public void setRole(Set<Role> role) {
+    public List<Role> getRole() {
+        return role;
+    }
+
+    public void setRole(List<Role> role) {
         this.role = role;
     }
 

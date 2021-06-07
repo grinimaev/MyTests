@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -41,7 +42,7 @@ public class UserService implements UserDetailsService {
         u.setActivated(false);
         u.setActivationCode(UUID.randomUUID().toString());
         emailService.sendActivationUrl(u);
-        u.setRole(Collections.singleton(new Role(role)));
+        u.setRole(Collections.singletonList(new Role(role)));
         userRepository.save(u);
         return 0;
     }
@@ -56,6 +57,12 @@ public class UserService implements UserDetailsService {
        else{
            return false;
        }
+    }
+    public List<User> findAll(){
+        return userRepository.findAll();
+    }
+    public void deleteUsrById(Long id){
+        userRepository.deleteById(id);
     }
 
 }

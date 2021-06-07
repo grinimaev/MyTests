@@ -62,7 +62,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
     public void deleteUsrById(Long id){
-        userRepository.deleteById(id);
+        if(userRepository.findById(id)!=null) userRepository.deleteById(id);
     }
 
 }

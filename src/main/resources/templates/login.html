@@ -18,12 +18,14 @@
         <div class="inputR"><input type="text" name="username" placeholder="Username" required></div>
         <div class="inputR">  <input type="password" name="password" placeholder="Password" required> </div>
         <div class="reginaBut"> <input type="submit" value="Login"/></div>
+        <div id="recover"> <a href="/recoverPass">Восстановить пароль</a></div>
       </div>
 
     </form>
     <div class="spanDiv">
       <span th:if="${param.error}">Неверные данные!</span>
-      <span th:if="${param.logout}">Успесшный выход!</span>
+      <span th:if="${param.logout}">Успешный выход!</span>
+      <span th:if="${recover}" th:text="${recover}"></span>
     </div>
   </div>
 

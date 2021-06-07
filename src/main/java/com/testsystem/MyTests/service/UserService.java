@@ -58,11 +58,35 @@ public class UserService implements UserDetailsService {
            return false;
        }
     }
+    public boolean recoverPassword(String email){
+        User u = userRepository.findByEmail(email);
+        if(u==null) return false;
+        u.setActivationCode(UUID.randomUUID().toString());
+        emailService.sendRecoverUrl(u);
+        userRepository.save(u);
+        return true;
+    }
+    public boolean recPassword(String activationCode, String password){
+        User u = userRepository.findByActivationCode(activationCode);
+        if(u!=null) {
+            u.setPassword(bCryptPasswordEncoder.encode(password));
+            u.setActivationCode(null);
+            userRepository.save(u);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     public List<User> findAll(){
         return userRepository.findAll();
     }
     public void deleteUsrById(Long id){
         if(userRepository.findById(id)!=null) userRepository.deleteById(id);
+    }
+    public boolean findByAcrivationCode(String activationCode){
+        if(userRepository.findByActivationCode(activationCode)!=null) return true;
+        else return false;
     }
 
 }

@@ -49,5 +49,27 @@ public class MainController {
         }
         return "register";
     }
+    @GetMapping("/recoverPass")
+    public String recoverPassGet() {
+        return "recoverPass";
+    }
+    @PostMapping("/recoverPass")
+    public String recoverPassGet(@RequestParam String email, Model model) {
+        if(userService.recoverPassword(email)) model.addAttribute("rec", "Ссылка для смены пароля отпралена на e-mail");
+        else model.addAttribute("rec", "Аккаунт не существует");
+        return "recoverPass";
+    }
+    @GetMapping("recoverPassword/{acrivationCode}")
+    public String recoverGet(@PathVariable String acrivationCode, Model model) {
+        if(!userService.findByAcrivationCode(acrivationCode)) model.addAttribute("error", "Ошибка восстановления");
+        model.addAttribute("code", acrivationCode );
+        return "recoverPassword";
+    }
+    @PostMapping("/recoverPassword/{acrivationCode}")
+    public String recoverPost(@PathVariable String acrivationCode, @RequestParam String password, Model model){
+        userService.recPassword(acrivationCode,password);
+        model.addAttribute("recover", "Пароль восстановлен");
+        return("login");
+    }
 
 }

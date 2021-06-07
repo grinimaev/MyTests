@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <meta charset="UTF-8">
+</head>
+<body>
+<header th:replace="header :: header"></header>
+
+</body>
+
+
+    <table>
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>E-mail</th>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="user : ${users}">
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getEmail()}"></td>
+        <td th:text="${user.getUsername()}"></td>
+        <td th:text="${user.getRole().get(0).getName()}"></td>
+        <td><a style="color: black"th:if="${user.getRole().get(0).getName()!='ROLE_ADMIN'}" th:href="@{delete-user/{id}(id=${user.getId()})}">Удалить</a></td>
+
+      </tr>
+      </tbody>
+    </table>
+
+</html>

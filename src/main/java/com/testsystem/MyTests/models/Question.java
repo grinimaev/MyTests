@@ -1,13 +1,23 @@
 package com.testsystem.MyTests.models;
 
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
+@Entity
 public class Question {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String question;
+
+    @OneToMany
+    @OrderBy("id ASC")
+    private List<Answer> answer;
+
+    @ManyToOne
+    private Test test;
 
     public Long getId() {
         return id;
@@ -24,4 +34,20 @@ public class Question {
     public void setQuestion(String question) {
         this.question = question;
     }
+
+    public List<Answer> getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(List<Answer> answer) {
+        this.answer = answer;
+    }
+
+    public Test getTest() {
+        return test;
+    }//????
+
+    public void setTest(Test test) {
+        this.test = test;
+    }//????
 }

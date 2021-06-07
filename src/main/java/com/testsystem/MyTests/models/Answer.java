@@ -2,12 +2,12 @@ package com.testsystem.MyTests.models;
 
 import javax.persistence.Id;
 
-public class Question {
+public class Answer {
 
     @Id
     private Long id;
 
-    private String question;
+    private String answer;
 
     public Long getId() {
         return id;
@@ -17,11 +17,11 @@ public class Question {
         this.id = id;
     }
 
-    public String getQuestion() {
-        return question;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }

@@ -1,8 +1,53 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <meta charset="UTF-8">
+</head>
 <body>
-<div th:fragment="content">
-  Верхняя часть страницы
-</div>
+
+
+  <div id="header" th:fragment="content" >
+  <header th:if="${!#authorization.expression('hasRole(''ROLE_USER'')||hasRole(''ROLE_ADMIN'')||hasRole(''ROLE_TESTER'')')}">
+      <div id="myTest1"> <a href="/">MyTests</a></div>
+      <div class="reg"> <a href="/login">Вход</a></div>
+      <div class="reg"><a href="/register">Регистрация</a></div>
+  </header>
+
+
+  <header th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+      <div id="myTest2"> <a href="/">MyTests</a></div>
+      <div class="reg"> <a href="/">Тесты</a></div>
+      <div class="reg"><a href="/">Профиль</a></div>
+      <form class="form" th:action="@{/logout}" method="post">
+
+          <div> <input class="exit" type="submit" value="Выйти"></div>
+      </form>
+
+  </header>
+
+      <header th:if="${#authorization.expression('hasRole(''ROLE_TESTER'')')}">
+          <div id="myTest3"> <a href="/">MyTests</a></div>
+          <div class="reg"> <a href="/">Создать тест</a></div>
+          <div class="reg"><a href="/">Профиль</a></div>
+          <form class="form" th:action="@{/logout}" method="post">
+
+              <div> <input class="exit" type="submit" value="Выйти"></div>
+          </form>
+
+      </header>
+
+      <header th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+          <div id="myTest4"> <a href="/">MyTests</a></div>
+          <div class="reg"> <a href="/">Администрирование</a></div>
+          <div class="reg"><a href="/">Профиль</a></div>
+          <form class="form" th:action="@{/logout}" method="post">
+
+              <div> <input class="exit" type="submit" value="Выйти"></div>
+          </form>
+
+      </header>
+  </div>
+
 </body>
 </html>

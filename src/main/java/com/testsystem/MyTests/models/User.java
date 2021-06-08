@@ -25,6 +25,9 @@ public class User implements UserDetails {
 
     private boolean isActivated;
 
+    @OneToMany
+    private List<Test> test;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> role;
 
@@ -117,5 +120,11 @@ public class User implements UserDetails {
         isActivated = activated;
     }
 
+    public List<Test> getTest() {
+        return test;
+    }
 
+    public void setTest(List<Test> test) {
+        this.test = test;
+    }
 }

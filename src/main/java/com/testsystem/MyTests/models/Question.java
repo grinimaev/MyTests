@@ -13,7 +13,6 @@ public class Question {
     private String question;
 
     @OneToMany
-    @OrderBy("id ASC")
     private List<Answer> answer;
 
     @ManyToOne

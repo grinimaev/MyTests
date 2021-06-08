@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <meta charset="UTF-8">
+</head>
+<body>
+<div th:replace="header :: content"></div>
+<form  th:action="@{/new}" method="post">
+    <div>  <input type="text" name="name" placeholder="Название теста" required> </div>
+    <div> <textarea rows="10" cols="45" name="description"></textarea></div>
+    <div> <input type="submit" value="Send"/></div>
+</form>
+</body>
+</html>

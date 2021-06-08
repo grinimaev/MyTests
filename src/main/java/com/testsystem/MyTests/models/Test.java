@@ -18,10 +18,11 @@ public class Test {
 
     private String description;
 
-    @OneToMany
-    @OrderBy("id ASC")
-    private List<Question> question;
+    @ManyToOne
+    private User owner;
 
+    @OneToMany
+    private List<Question> question;
 
     public Long getId() {
         return id;
@@ -55,4 +56,11 @@ public class Test {
         this.description = description;
     }
 
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
 }

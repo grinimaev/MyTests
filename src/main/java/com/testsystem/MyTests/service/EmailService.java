@@ -28,6 +28,9 @@ public class EmailService {
     public void sendActivationUrl(User u) {
         send(u.getEmail(), "Активация аккаунта", "Активация для пользователя " + u.getUsername() + ". Для активации аккаунта перейдите по ссылке http://localhost:8080/confirmRegistration/" + u.getActivationCode());
     }
+    public void sendRecoverUrl(User u) {
+        send(u.getEmail(), "Восстановление пароля", "Восстановление пароля для " + u.getUsername() + ". Для восстановления аккаунта перейдите по ссылке http://localhost:8080/recoverPassword/" + u.getActivationCode());
+    }
 
 //    public void sendTestResult(Taked t) {
 //        send(t.getUser().getEmail(), "Система тестирования: результаты теста", "Здравствуйте! результаты теста '" + t.getTest().getName() + "': " + t.resultsToString());

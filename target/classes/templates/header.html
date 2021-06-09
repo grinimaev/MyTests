@@ -29,7 +29,7 @@
       <header th:if="${#authorization.expression('hasRole(''ROLE_TESTER'')')}">
           <div id="myTest3"> <a href="/">MyTests</a></div>
           <div class="reg"> <a href="/test/list">Мои тесты</a></div>
-          <div class="reg"><a href="/">Профиль</a></div>
+          <div class="reg"><a href="/profile">Профиль</a></div>
           <form class="form" th:action="@{/logout}" method="post">
 
               <div> <input class="exit" type="submit" value="Выйти"></div>

@@ -86,4 +86,13 @@ public class MainController {
         return ("profile");
     }
 
+    @GetMapping("/changePassword")
+    public String getChangePass(){
+        return "changePassword";
+    }
+    @PostMapping("/changePassword")
+    public String postChangePass(@AuthenticationPrincipal UserDetails u, @RequestParam String password){
+        userService.changePass(u.getUsername(),password);
+        return "redirect:/profile";
+    }
 }

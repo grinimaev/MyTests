@@ -25,7 +25,7 @@ public class User implements UserDetails {
 
     private boolean isActivated;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Test> test;
 
     @ManyToMany(fetch = FetchType.EAGER)

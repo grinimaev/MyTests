@@ -6,21 +6,27 @@
 </head>
 <body>
 <div th:replace="header :: content"></div>
-<div th:text="${user.getUsername()}"></div>
-<table>
-  <thead>
-  <tr>
-    <th>Description</th>
-    <th>Action</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="test: ${user.getTest()}">
-    <td th:text="${test.getName()}"></td>
-    <td><a style="color: black"th:href="@{/test/deleteTest/{id}(id=${test.getId()})}">Удалить</a></td>
-  </tr>
-  </tbody>
-</table>
-<div><a style="color: black"th:href="@{/test/new}">Создать тест</a></div>
+<div class = "forTable">
+  <div class="shapka" th:text="'Тесты ' + ${user.getUsername()}"></div>
+  <table>
+    <thead>
+    <tr id="thead">
+      <th>Название</th>
+      <th>Изменение</th>
+      <th>Удаление</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="test: ${user.getTest()}">
+      <td th:text="${test.getName()}"></td>
+      <td><a style="color: black"th:href="@{/test/edit/{id}(id=${test.getId()})}">Изменить</a></td>
+      <td><a style="color: black"th:href="@{/test/deleteTest/{id}(id=${test.getId()})}">Удалить</a></td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="createDiv"><a id = 'create' th:href="@{/test/new}">Создать тест</a></div>
+</div>
+
+
 </body>
 </html>

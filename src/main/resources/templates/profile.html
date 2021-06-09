@@ -6,18 +6,25 @@
 </head>
 <body>
 <div th:replace="header :: content"></div>
-<div>
-  <h1>Личный кабинет</h1>
-  <div>
-    <h2>Свединия о профиле</h2>
-    <tr>
-      <td th:text="${user.getEmail()}"></td>
-      <td th:text="${user.getUsername()}"></td>
-      <td th:if="${user.getRole().get(0).getName()=='ROLE_USER'}">Пользователь</td>
-      <td th:if="${user.getRole().get(0).getName()=='ROLE_TESTER'}">Тестировщик</td>
-      <td th:if="${user.getRole().get(0).getName()=='ROLE_ADMIN'}">Администратор</td>
-    </tr>
+<div class="regina" id="kabinet">
+  <div class="textR" >Личный кабинет</div>
+  <div class="contentR">
+
+
+    <form class="formReg" th:action="@{/login}" method="post">
+
+      <div class="polya">
+        <div class="sh" th:text="${user.getUsername()}"> </div>
+        <div class="inputR"> E-mail:</div>
+        <div class="inputR"  id = "get" th:text="${user.getEmail()}"></div>
+        <div class="inputR"> Account type:</div>
+        <div class="inputR" id = "get" th:if="${user.getRole().get(0).getName()=='ROLE_USER'}"> Пользователь</div>
+        <div class="inputR" id = "get" th:if="${user.getRole().get(0).getName()=='ROLE_TESTER'}"> Тестировщик </div>
+        <div class="inputR" id = "get" th:if="${user.getRole().get(0).getName()=='ROLE_ADMIN'}"> Администратор</div>
+        <div  id = "changeButt"> <a class="changePass" href="/changePassword">Сменить пароль</a></div>
+      </div>
+    </form>
   </div>
-</div>
+
 </body>
 </html>

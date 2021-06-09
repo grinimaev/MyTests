@@ -89,4 +89,10 @@ public class UserService implements UserDetailsService {
         else return false;
     }
 
+    public void changePass(String username,String password){
+        User user = userRepository.findByUsername(username);
+        user.setPassword(bCryptPasswordEncoder.encode(password));
+        userRepository.save(user);
+    }
+
 }

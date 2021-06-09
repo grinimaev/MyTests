@@ -6,22 +6,59 @@
 </head>
 <body>
 <div th:replace="header :: content"></div>
-<div th:text="${test.getName()}"></div>
-<div th:text="${test.getDescription()}"></div>
-<table>
-  <thead>
-  <tr>
-    <th>Description</th>
-    <th>Action</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="question : ${test.getQuestion()}">
-    <td th:text="${question.getQuestion()}"></td>
-    <td><a style="color: black"th:href="@{/test/edit/deleteQuestion/{id}(id=${question.getId()})}">Удалить</a></td>
-  </tr>
-  </tbody>
-</table>
-<div><a style="color: black"th:href="@{/test/edit/newQuestion/{id}(id=${test.getId()})}">Добавить вопрос</a></div>
+<div class="shapka" id ='shapkaEdit'>Изменение теста</div>
+<div class="testEdit">
+  <div class="contentTest">
+    <div class="nameTest" th:text="${test.getName()}"></div>
+    <div  class="descTest" th:text="${test.getDescription()}"></div>
+  </div>
+ <div class="quests">
+   <div class="forTable">
+     <table>
+       <thead>
+       <tr id="thead">
+         <th>Вопрос</th>
+         <th>Удалить</th>
+       </tr>
+       </thead>
+       <tbody>
+       <tr th:each="question : ${test.getQuestion()}">
+         <td style="width: 100px" ><textarea th:text="${question.getQuestion()}" readonly></textarea> </td>
+         <td><a style="color: black"th:href="@{/test/edit/deleteQuestion/{id}(id=${question.getId()})}">Удалить</a></td>
+       </tr>
+       </tbody>
+     </table>
+     <div class="createDiv"><a id = 'create' th:href="@{/test/edit/newQuestion/{id}(id=${test.getId()})}">Добавить вопрос</a></div>
+
+   </div>
+
+ </div>
+
+</div>
+<!--<div class = "forTable">-->
+<!--  <div class="shapka" >Редактирование теста</div>-->
+<!--  <table>-->
+<!--    <thead>-->
+<!--    <tr id="thead">-->
+<!--      <th>Description</th>-->
+<!--      <th>Edit</th>-->
+<!--      <th>Action</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="test: ${user.getTest()}">-->
+<!--      <td th:text="${test.getName()}"></td>-->
+<!--      <td><a style="color: black"th:href="@{/test/edit/{id}(id=${test.getId()})}">Изменить</a></td>-->
+<!--      <td><a style="color: black"th:href="@{/test/deleteTest/{id}(id=${test.getId()})}">Удалить</a></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+<!--  <div class="createDiv"><a id = 'create' th:href="@{/test/new}">Создать тест</a></div>-->
+<!--</div>-->
+
+
+
+
+
 </body>
 </html>

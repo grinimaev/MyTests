@@ -35,6 +35,9 @@ public class TestController {
    @Autowired
     QuestionRepository questionRepository;
 
+   @Autowired
+   UserRepository userRepository;
+
     @GetMapping("/new")
     public String newTest(){
         return "newTest";
@@ -60,7 +63,7 @@ public class TestController {
     @PostMapping("/edit/newQuestion/{id}")
     public String postNewQuest(@PathVariable Long id, @RequestParam("answer") List<String> answers, @RequestParam String question, @RequestParam Long trueAns){
         testService.addQuestion(id,question,answers,trueAns);
-        return "newQuestion";
+        return "redirect:/test/edit/"+id;
     }
     @GetMapping("/edit/deleteQuestion/{id}")
     public String deleteQuestion(@PathVariable Long id)
@@ -69,5 +72,18 @@ public class TestController {
         Test test = quest.getTest();
         testService.deleteQuest(id);
         return "redirect:/test/edit/"+test.getId();
+    }
+    @GetMapping("/list")
+    public String testList(@AuthenticationPrincipal UserDetails u, Model model)
+    {
+        User user = userRepository.findByUsername(u.getUsername());
+        model.addAttribute("user", user);
+        return "testList";
+    }
+    @GetMapping("/deleteTest/{id}")
+    public String deleteTest(@PathVariable Long id)
+    {
+        testService.deleteTest(id);
+        return "redirect:/test/list";
     }
 }

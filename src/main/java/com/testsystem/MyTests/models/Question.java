@@ -12,7 +12,7 @@ public class Question {
 
     private String question;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Answer> answer;
 
     @ManyToOne

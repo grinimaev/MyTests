@@ -71,7 +71,11 @@ public class TestService {
 
     }
     public void deleteQuest(Long id){
-        Question quest = questionRepository.findById(id).get();
-        if(quest!=null) questionRepository.deleteById(id);
+        questionRepository.deleteForeignKey(id);
+        if(questionRepository.findById(id)!=null) questionRepository.deleteById(id);
+    }
+    public void deleteTest(Long id){
+        testRepository.deleteForeignKey(id);
+        if(testRepository.findById(id)!=null) testRepository.deleteById(id);
     }
 }

@@ -21,7 +21,7 @@ public class Test {
     @ManyToOne
     private User user;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Question> question;
 
     public Test(User user,String name, String description) {

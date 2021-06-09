@@ -16,6 +16,13 @@ public class Answer {
     @ManyToOne
     private Question question;
 
+    public Answer(){}
+    public Answer(Question question,String answer, boolean flag) {
+        this.question=question;
+        this.answer = answer;
+        this.flag = flag;
+    }
+
     public Long getId() {
         return id;
     }

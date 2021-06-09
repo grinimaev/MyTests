@@ -15,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
-//@EnableWebSecurity
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -32,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/register","/confirmRegistration/**","/recoverPass","/recoverPassword/**").anonymous()
                 .antMatchers("/*.css").permitAll()
+                .antMatchers("/test/**").hasRole("TESTER")
                 .antMatchers("/admin/**", "/delete-user/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()

@@ -19,10 +19,17 @@ public class Test {
     private String description;
 
     @ManyToOne
-    private User owner;
+    private User user;
 
     @OneToMany
     private List<Question> question;
+
+    public Test(User user,String name, String description) {
+        this.user = user;
+        this.name = name;
+        this.description = description;
+    }
+    public Test(){}
 
     public Long getId() {
         return id;
@@ -56,11 +63,14 @@ public class Test {
         this.description = description;
     }
 
-    public User getOwner() {
-        return owner;
+    public User getUser() {
+        return user;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setUser(User user) {
+        this.user = user;
+    }
+    public void addQuest(Question question){
+        this.question.add(question);
     }
 }

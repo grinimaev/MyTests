@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <meta charset="UTF-8">
+</head>
+<body>
+<div th:replace="header :: content"></div>
+<div th:text="${test.getName()}"></div>
+<div th:text="${test.getDescription()}"></div>
+<table>
+  <thead>
+  <tr>
+    <th>Description</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="question : ${test.getQuestion()}">
+    <td th:text="${question.getQuestion()}"></td>
+    <td><a style="color: black"th:href="@{/test/edit/deleteQuestion/{id}(id=${question.getId()})}">Удалить</a></td>
+  </tr>
+  </tbody>
+</table>
+<div><a style="color: black"th:href="@{/test/edit/newQuestion/{id}(id=${test.getId()})}">Добавить вопрос</a></div>
+</body>
+</html>

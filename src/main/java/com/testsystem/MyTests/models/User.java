@@ -127,4 +127,8 @@ public class User implements UserDetails {
     public void setTest(List<Test> test) {
         this.test = test;
     }
+
+    public void addTest(Test test){
+        this.test.add(test);
+    }
 }

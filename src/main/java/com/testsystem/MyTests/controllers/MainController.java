@@ -1,9 +1,11 @@
 package com.testsystem.MyTests.controllers;
 
 import com.testsystem.MyTests.models.User;
+import com.testsystem.MyTests.repository.UserRepository;
 import com.testsystem.MyTests.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,9 @@ import java.util.Optional;
 public class MainController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping("/")
     public String home(Model model) {
@@ -75,8 +80,8 @@ public class MainController {
     }
 
     @GetMapping("/profile")
-    public String profile(@AuthenticationPrincipal User u,@RequestParam String id, Model model) {
-        Optional<User> user =userService.findUserById(Long.valueOf(id));
+    public String profile(@AuthenticationPrincipal UserDetails u, Model model) {
+        User user = userRepository.findByUsername(u.getUsername());
         model.addAttribute("user", user);
         return ("profile");
     }

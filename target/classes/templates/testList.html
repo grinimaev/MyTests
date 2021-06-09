@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <meta charset="UTF-8">
+</head>
+<body>
+<div th:replace="header :: content"></div>
+<div th:text="${user.getUsername()}"></div>
+<table>
+  <thead>
+  <tr>
+    <th>Description</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="test: ${user.getTest()}">
+    <td th:text="${test.getName()}"></td>
+    <td><a style="color: black"th:href="@{/test/deleteTest/{id}(id=${test.getId()})}">Удалить</a></td>
+  </tr>
+  </tbody>
+</table>
+<div><a style="color: black"th:href="@{/test/new}">Создать тест</a></div>
+</body>
+</html>

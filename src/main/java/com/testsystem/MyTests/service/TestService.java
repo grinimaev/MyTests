@@ -52,14 +52,12 @@ public class TestService {
         questionRepository.save(quest);
         List<Answer> answerList = new ArrayList<Answer>();
         for (int i = 0; i < answers.size(); i++) {
-           if(i==trueAns) {
-               Answer tempAns = new Answer(quest,answers.get(i),true);
-               answerList.add(tempAns);
-               answerRepository.save(tempAns);
-           }
-           else
-            {
-                Answer tempAns = new Answer(quest,answers.get(i),false);
+            if (i == trueAns) {
+                Answer tempAns = new Answer(quest, answers.get(i), true);
+                answerList.add(tempAns);
+                answerRepository.save(tempAns);
+            } else {
+                Answer tempAns = new Answer(quest, answers.get(i), false);
                 answerList.add(tempAns);
                 answerRepository.save(tempAns);
             }
@@ -70,12 +68,28 @@ public class TestService {
         testRepository.save(test);
 
     }
-    public void deleteQuest(Long id){
+
+    public void deleteQuest(Long id) {
         questionRepository.deleteForeignKey(id);
-        if(questionRepository.findById(id)!=null) questionRepository.deleteById(id);
+        if (questionRepository.findById(id) != null) questionRepository.deleteById(id);
     }
-    public void deleteTest(Long id){
+
+    public void deleteTest(Long id) {
         testRepository.deleteForeignKey(id);
-        if(testRepository.findById(id)!=null) testRepository.deleteById(id);
+        if (testRepository.findById(id) != null) testRepository.deleteById(id);
+    }
+
+    public int getResult(Long testId, List<Long> answers) {
+        int result=0;
+        Test test = testRepository.findById(testId).get();
+        for (int i = 0; i < answers.size(); i++) {
+            if (test.getQuestion().get(i).getAnswer().get(answers.get(i).intValue()).isFlag() == true) result++;
+        }
+        return result;
+    }
+    public void setPublic(Long id){
+        Test test = testRepository.findById(id).get();
+        test.setPublish(true);
+        testRepository.save(test);
     }
 }

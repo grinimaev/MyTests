@@ -1,7 +1,11 @@
 package com.testsystem.MyTests.controllers;
 
+import com.testsystem.MyTests.models.Test;
 import com.testsystem.MyTests.models.User;
+import com.testsystem.MyTests.repository.TestRepository;
 import com.testsystem.MyTests.repository.UserRepository;
+import com.testsystem.MyTests.service.EmailService;
+import com.testsystem.MyTests.service.TestService;
 import com.testsystem.MyTests.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -23,9 +28,18 @@ public class MainController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    TestRepository testRepository;
+    @Autowired
+    TestService testService;
+
+    @Autowired
+    EmailService emailService;
+
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("title", "MyTests");
+        List<Test> testList = testRepository.findAll();
+        model.addAttribute("tests", testList);
         return "home";
     }
     @GetMapping("/register")
@@ -94,5 +108,23 @@ public class MainController {
     public String postChangePass(@AuthenticationPrincipal UserDetails u, @RequestParam String password){
         userService.changePass(u.getUsername(),password);
         return "redirect:/profile";
+    }
+    @GetMapping("/makeTest/{id}")
+    public String getMakeTest(@PathVariable Long id, Model model)
+    {
+        Test test = testRepository.findById(id).get();
+        model.addAttribute("test", test);
+        return "makeTest";
+    }
+    @PostMapping("/makeTest/{id}")
+    public String getMakeTest(@AuthenticationPrincipal UserDetails u,@PathVariable Long id, @RequestParam("answers") List<Long> answers , Model model)
+    {
+        Test test = testRepository.findById(id).get();
+        int countQuests = test.getQuestion().size();
+        int result= testService.getResult(id,answers);
+        emailService.sendTestResult(u.getUsername(),test,result,countQuests);
+        model.addAttribute("count", countQuests);
+        model.addAttribute("result", result);
+        return "result";
     }
 }

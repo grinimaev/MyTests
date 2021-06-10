@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+<div th:replace="header :: content"></div>
+<div class="regina">
+    <input th:value="${test.getQuestion().size()}" type="hidden" id="size" >
+    <input th:value="${test.getId()}" type="hidden" id="testID" >
+
+    <div class="textR" id='NameHead' th:text="${test.getName()}"></div>
+    <div class="textR" id='descripHead'th:text="${test.getDescription()}"></div>
+
+   <div class="formReg" id="tests">
+       <div class="polya">
+
+       <div th:each="quest: ${test.getQuestion()}">
+           <div class="question" hidden="true" th:id="'q'+${questStat.index}" th:text="${quest.getQuestion()}"></div>
+           <div th:id="'ans'+${questStat.index}" hidden="true">
+               <div class="Answer" th:each="answer, i: ${quest.getAnswer()}">
+                   <input  class="switchRole" type="radio" th:name="'answer'+${questStat.index}" th:value="${i.index}"><div class="textAnsw" th:text="${answer.getAnswer()}"> </div>
+               </div>
+           </div>
+       </div>
+
+       <div class="reginaBut" id="delreg" ><input id="butt" type="button" onclick="checkans()" value="Начать тестировние"></div>
+           <form id="formAnswers" th:action="'/makeTest/'+${test.getId()}" method="post"></form>
+   </div>
+   </div>
+</div>
+
+
+
+
+<!--  -->
+<!--<div th:text="${test.getName()}"></div>-->
+<!--<div th:text="${test.getDescription()}"></div>-->
+
+
+<!--<input th:value="${test.getQuestion().size()}" type="hidden" id="size" >-->
+<!--<input th:value="${test.getId()}" type="hidden" id="testID" >-->
+<!--<div th:each="quest: ${test.getQuestion()}">-->
+<!--    <div hidden="true" th:id="'q'+${questStat.index}" th:text="${quest.getQuestion()}"></div>-->
+<!--    <div th:id="'ans'+${questStat.index}" hidden="true">-->
+<!--        <div th:each="answer, i: ${quest.getAnswer()}">-->
+<!--        <input  type="radio" th:name="'answer'+${questStat.index}" th:value="${i.index}"><label th:text="${answer.getAnswer()}"> </label>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--    <input id="butt" type="button" onclick="checkans()" value="Начать тестировние">-->
+<!--<form id="formAnswers" th:action="'/makeTest/'+${test.getId()}" method="post"></form>-->
+
+
+
+
+
+
+<script>
+
+   let index=-1;
+   let arr =[];
+   let q;
+   let ansh;
+   let size = document.getElementById('size').value;
+   let testId = document.getElementById('testID').value;
+    function checkans()
+    {
+
+
+        if(index==-1){
+            index++;
+            q=document.getElementById('q'+index);
+            ansh= document.getElementById('ans'+index);
+            q.removeAttribute("hidden");
+            ansh.removeAttribute("hidden");
+            let butt=document.getElementById('butt').value='Следующий вопрос';
+        }
+        else if(index<size-1){
+            let nameans="answer"+index;
+            console.log(nameans);
+            let answer = document.querySelector('input[name='+nameans+']:checked').value;
+            arr.push(answer);
+            console.log(arr);
+            q=document.getElementById('q'+index);
+            ansh= document.getElementById('ans'+index);
+            q.setAttribute("hidden","true");
+            ansh.setAttribute("hidden","true");
+            index++;
+            q=document.getElementById('q'+index);
+            ansh= document.getElementById('ans'+index);
+            q.removeAttribute("hidden");
+            ansh.removeAttribute("hidden");
+
+        }
+        else if(index==size-1){
+            let nameans="answer"+index;
+            let answer = document.querySelector('input[name='+nameans+']:checked').value;
+            arr.push(answer);
+            q=document.getElementById('q'+index);
+            ansh= document.getElementById('ans'+index);
+            q.setAttribute("hidden","true");
+            ansh.setAttribute("hidden","true");
+            let butt=document.getElementById('delreg').remove();
+            let form=document.getElementById('formAnswers');
+
+            for(let i=0;i<arr.length;i++){
+                form.innerHTML+="<input type=\"hidden\" name=\"answers\" value=\""+arr[i]+"\">";
+            }
+            form.innerHTML+="<input class=\"reginaBut\" type=\"submit\" value=\"Завершить тест\">";
+        }
+
+    }
+</script>
+</body>
+</html>

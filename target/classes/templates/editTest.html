@@ -11,6 +11,8 @@
   <div class="contentTest">
     <div class="nameTest" th:text="${test.getName()}"></div>
     <div  class="descTest" th:text="${test.getDescription()}"></div>
+    <div th:if="!${test.isPublish()}" class="publicBut">  <a th:href="'/test/edit/publish/'+${test.getId()}">Опубликовать</a> </div>
+
   </div>
  <div class="quests">
    <div class="forTable">
@@ -35,29 +37,6 @@
  </div>
 
 </div>
-<!--<div class = "forTable">-->
-<!--  <div class="shapka" >Редактирование теста</div>-->
-<!--  <table>-->
-<!--    <thead>-->
-<!--    <tr id="thead">-->
-<!--      <th>Description</th>-->
-<!--      <th>Edit</th>-->
-<!--      <th>Action</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr th:each="test: ${user.getTest()}">-->
-<!--      <td th:text="${test.getName()}"></td>-->
-<!--      <td><a style="color: black"th:href="@{/test/edit/{id}(id=${test.getId()})}">Изменить</a></td>-->
-<!--      <td><a style="color: black"th:href="@{/test/deleteTest/{id}(id=${test.getId()})}">Удалить</a></td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--  </table>-->
-<!--  <div class="createDiv"><a id = 'create' th:href="@{/test/new}">Создать тест</a></div>-->
-<!--</div>-->
-
-
-
 
 
 </body>

@@ -86,4 +86,9 @@ public class TestController {
         testService.deleteTest(id);
         return "redirect:/test/list";
     }
+    @GetMapping("/edit/publish/{id}")
+    public String setPublish(@PathVariable Long id){
+        testService.setPublic(id);
+        return "redirect:/test/edit/"+id;
+    }
 }

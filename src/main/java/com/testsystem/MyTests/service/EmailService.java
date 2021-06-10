@@ -2,6 +2,7 @@ package com.testsystem.MyTests.service;
 
 import java.util.Properties;
 
+import com.testsystem.MyTests.models.Test;
 import com.testsystem.MyTests.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,15 +33,8 @@ public class EmailService {
         send(u.getEmail(), "Восстановление пароля", "Восстановление пароля для " + u.getUsername() + ". Для восстановления аккаунта перейдите по ссылке http://localhost:8080/recoverPassword/" + u.getActivationCode());
     }
 
-//    public void sendTestResult(Taked t) {
-//        send(t.getUser().getEmail(), "Система тестирования: результаты теста", "Здравствуйте! результаты теста '" + t.getTest().getName() + "': " + t.resultsToString());
-//    }
+    public void sendTestResult(String username, Test test, int result, int count) {
+        send(test.getUser().getEmail(), "Кто-то прошёл ваш тест!", "Здравствуйте! Пользователь " + username + " прошел ваш тест! Его результат " + result+"/"+count);
+   }
 
-//    public void sendRecoverMessage(User u) {
-//        send(u.getEmail(), "Система тестирования: сменя пароля", "Здравствуйте! Для смены пароля проследуйте по ссылке: http://localhost:8080/recoverPassword/" + u.getActivationCode());
-//    }
-
-//    public void sendInvitation(User u, Test t) {
-//        send(u.getEmail(), "Система тестирования: приглашение пройти тест", "Здравствуйте! Вы приглашены пройти тест '" + t.getName() + "'. Для прохождения проследуйте по ссылке: http://localhost:8080/take/" + t.getId());
-//    }
 }

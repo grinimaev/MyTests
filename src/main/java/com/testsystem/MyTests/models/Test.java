@@ -17,7 +17,7 @@ public class Test {
     private String name;
 
     private String description;
-
+    private boolean publish;
     @ManyToOne
     private User user;
 
@@ -28,6 +28,7 @@ public class Test {
         this.user = user;
         this.name = name;
         this.description = description;
+        this.publish=false;
     }
     public Test(){}
 
@@ -72,5 +73,13 @@ public class Test {
     }
     public void addQuest(Question question){
         this.question.add(question);
+    }
+
+    public boolean isPublish() {
+        return publish;
+    }
+
+    public void setPublish(boolean publish) {
+        this.publish = publish;
     }
 }

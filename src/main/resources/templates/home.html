@@ -7,8 +7,9 @@
 <body>
 <div th:replace="header :: content"></div>
 <div class = "forTable">
-    <div class="shapka" th:text="'Открытые тесты'"></div>
-    <table>
+    <div class="shapka"  th:text="'Открытые тесты'"></div>
+    <div class="shapka"  th:if="${tests.size()==0}" th:text="'Нет открытых'"></div>
+    <table th:if="${tests.size()>0}">
         <thead>
         <tr id="thead">
             <th>Название</th>

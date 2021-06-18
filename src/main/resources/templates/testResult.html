@@ -8,7 +8,8 @@
 <div th:replace="header :: content"></div>
 <div class="forTable">
     <div class="shapka"> Результаты </div>
-    <table>
+    <div th:if="${results.size()==0}" class="shapka"> Нет результатов </div>
+    <table th:if="${results.size()>0}">
         <thead>
         <tr id="thead">
             <th>Пользователь</th>

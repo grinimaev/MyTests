@@ -4,7 +4,6 @@ package com.testsystem.MyTests.models;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
@@ -27,6 +26,9 @@ public class User implements UserDetails {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Test> test;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Result> result;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> role;
@@ -130,5 +132,16 @@ public class User implements UserDetails {
 
     public void addTest(Test test){
         this.test.add(test);
+    }
+
+    public List<Result> getResult() {
+        return result;
+    }
+
+    public void setResult(List<Result> result) {
+        this.result = result;
+    }
+    public void addResult(Result result){
+        this.result.add(result);
     }
 }

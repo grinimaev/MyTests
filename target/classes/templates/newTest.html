@@ -6,10 +6,25 @@
 </head>
 <body>
 <div th:replace="header :: content"></div>
-<form  th:action="@{/test/new}" method="post">
-    <div>  <input type="text" name="name" placeholder="Название теста" required> </div>
-    <div> <textarea rows="10" cols="45" name="description"></textarea></div>
-    <div> <input type="submit" value="Send"/></div>
-</form>
+<div class="regina">
+    <div class="textR">Создание теста</div>
+    <div class="contentR">
+
+
+        <form class="formReg" th:action="@{/test/new}" method="post">
+
+            <div class="polya">
+
+                <div class="inputR"><input type="text" name="name" placeholder="Название теста" required></div>
+                <div class="inputR"> <textarea rows="10" name="description" placeholder="Описание теста"></textarea></div>
+                <div class="reginaBut"> <input type="submit" value="Создать"/></div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+
 </body>
 </html>

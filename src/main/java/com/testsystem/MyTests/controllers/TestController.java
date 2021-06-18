@@ -50,13 +50,15 @@ public class TestController {
     }
 
     @GetMapping("/edit/{id}")
-    public String newTest(@PathVariable Long id, Model model){
+    public String newTest(@AuthenticationPrincipal UserDetails user,@PathVariable Long id, Model model){
+        if(!testService.isOwner(id, user.getUsername())) return "error/403";
         model.addAttribute("test", testRepository.findById(id).get());
         return "editTest";
     }
 
     @GetMapping("/edit/newQuestion/{id}")
-    public String getNewQuest(@PathVariable Long id, Model model){
+    public String getNewQuest(@AuthenticationPrincipal UserDetails user,@PathVariable Long id, Model model){
+        if(!testService.isOwner(id, user.getUsername())) return "error/403";
         model.addAttribute("testid", id);
         return "newQuestion";
     }
@@ -66,8 +68,9 @@ public class TestController {
         return "redirect:/test/edit/"+id;
     }
     @GetMapping("/edit/deleteQuestion/{id}")
-    public String deleteQuestion(@PathVariable Long id)
+    public String deleteQuestion(@AuthenticationPrincipal UserDetails user,@PathVariable Long id)
     {
+        if(!testService.isOwner(user.getUsername(),id)) return "error/403";
         Question quest = questionRepository.findById(id).get();
         Test test = quest.getTest();
         testService.deleteQuest(id);
@@ -81,14 +84,22 @@ public class TestController {
         return "testList";
     }
     @GetMapping("/deleteTest/{id}")
-    public String deleteTest(@PathVariable Long id)
+    public String deleteTest(@AuthenticationPrincipal UserDetails user,@PathVariable Long id)
     {
+        if(!testService.isOwner(id, user.getUsername())) return "error/403";
         testService.deleteTest(id);
         return "redirect:/test/list";
     }
     @GetMapping("/edit/publish/{id}")
-    public String setPublish(@PathVariable Long id){
+    public String setPublish(@AuthenticationPrincipal UserDetails user,@PathVariable Long id){
+        if(!testService.isOwner(id, user.getUsername())) return "error/403";
         testService.setPublic(id);
         return "redirect:/test/edit/"+id;
+    }
+    @GetMapping("/results/{id}")
+    public String testResults(@AuthenticationPrincipal UserDetails user,@PathVariable Long id, Model model){
+        if(!testService.isOwner(id, user.getUsername())) return "error/403";
+        model.addAttribute("results", testRepository.findById(id).get().getResult());
+        return "testResult";
     }
 }

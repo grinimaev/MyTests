@@ -122,9 +122,16 @@ public class MainController {
         Test test = testRepository.findById(id).get();
         int countQuests = test.getQuestion().size();
         int result= testService.getResult(id,answers);
+        testService.newResult(u.getUsername(),id, (long) result);
         emailService.sendTestResult(u.getUsername(),test,result,countQuests);
         model.addAttribute("count", countQuests);
         model.addAttribute("result", result);
         return "result";
+    }
+    @GetMapping("/results")
+    public String userResult(@AuthenticationPrincipal UserDetails user, Model model){
+        User u = userRepository.findByUsername(user.getUsername());
+        model.addAttribute("results", u.getResult());
+        return "userResult";
     }
 }

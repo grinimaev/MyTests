@@ -6,5 +6,24 @@
 </head>
 <body>
 <div th:replace="header :: content"></div>
+<div class = "forTable">
+    <div class="shapka" th:text="'Открытые тесты'"></div>
+    <table>
+        <thead>
+        <tr id="thead">
+            <th>Название</th>
+            <th>Описание</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${test.isPublish()}" th:each="test: ${tests}">
+
+            <td ><a  th:text="${test.getName()}" style="color: black"th:href="@{/makeTest/{id}(id=${test.getId()})}"></a></td>
+            <td th:text="${test.getDescription()}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

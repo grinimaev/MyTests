@@ -1,7 +1,10 @@
 package com.testsystem.MyTests.service;
 
+import com.testsystem.MyTests.models.Result;
 import com.testsystem.MyTests.models.Role;
 import com.testsystem.MyTests.models.User;
+import com.testsystem.MyTests.repository.ResultRepository;
+import com.testsystem.MyTests.repository.TestRepository;
 import com.testsystem.MyTests.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,10 +24,19 @@ public class UserService implements UserDetailsService {
     EmailService emailService;
 
     @Autowired
+    TestService testService;
+
+    @Autowired
     UserRepository userRepository;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    ResultRepository resultRepository;
+
+    @Autowired
+    TestRepository testRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -82,7 +94,16 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
     public void deleteUsrById(Long id){
-        if(userRepository.findById(id)!=null) userRepository.deleteById(id);
+        if(userRepository.findById(id)!=null) {
+            User user = userRepository.findById(id).get();
+            for(int i=0;i<user.getTest().size();i++){
+                testService.deleteTest(user.getTest().get(i).getId());
+            }
+            System.out.println(user.getResult().size());
+            if(user.getResult().size()>0) {userRepository.deleteForeignKeyUsRes(user.getId());
+            userRepository.deleteForeignKey(id);}
+            userRepository.deleteById(id);
+        }
     }
     public boolean findByAcrivationCode(String activationCode){
         if(userRepository.findByActivationCode(activationCode)!=null) return true;

@@ -21,7 +21,8 @@
         <div class="inputR" id = "get" th:if="${user.getRole().get(0).getName()=='ROLE_USER'}"> Пользователь</div>
         <div class="inputR" id = "get" th:if="${user.getRole().get(0).getName()=='ROLE_TESTER'}"> Тестировщик </div>
         <div class="inputR" id = "get" th:if="${user.getRole().get(0).getName()=='ROLE_ADMIN'}"> Администратор</div>
-        <div  id = "changeButt"> <a class="changePass" href="/changePassword">Сменить пароль</a></div>
+        <div  class = "changeButt"> <a class="changePass" href="/changePassword">Сменить пароль</a></div>
+        <div  class = "changeButt"> <a class="changePass" href="/results">Мои результаты</a></div>
       </div>
     </form>
   </div>

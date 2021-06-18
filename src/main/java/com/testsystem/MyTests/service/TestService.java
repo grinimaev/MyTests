@@ -1,13 +1,7 @@
 package com.testsystem.MyTests.service;
 
-import com.testsystem.MyTests.models.Answer;
-import com.testsystem.MyTests.models.Question;
-import com.testsystem.MyTests.models.Test;
-import com.testsystem.MyTests.models.User;
-import com.testsystem.MyTests.repository.AnswerRepository;
-import com.testsystem.MyTests.repository.QuestionRepository;
-import com.testsystem.MyTests.repository.TestRepository;
-import com.testsystem.MyTests.repository.UserRepository;
+import com.testsystem.MyTests.models.*;
+import com.testsystem.MyTests.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +28,9 @@ public class TestService {
 
     @Autowired
     EmailService emailService;
+
+    @Autowired
+    ResultRepository resultRepository;
 
     public Long addNewTest(String username, String name, String description) {
         User u = userRepository.findByUsername(username);
@@ -75,8 +72,20 @@ public class TestService {
     }
 
     public void deleteTest(Long id) {
-        testRepository.deleteForeignKey(id);
-        if (testRepository.findById(id) != null) testRepository.deleteById(id);
+        if (testRepository.findById(id) != null) {
+            Test test = testRepository.findById(id).get();
+            User user = test.getUser();
+            for(int i=0; i<test.getResult().size();i++)
+            {
+                System.out.println(test.getResult().size());
+                userRepository.deleteForeignKeyUsRes2(test.getResult().get(i).getId());
+            }
+
+            testRepository.deleteForeignKeyTestRes(id);
+           // testRepository.deleteForeignKeyRes(id);
+            testRepository.deleteForeignKey(id);
+            testRepository.deleteById(id);
+        }
     }
 
     public int getResult(Long testId, List<Long> answers) {
@@ -91,5 +100,26 @@ public class TestService {
         Test test = testRepository.findById(id).get();
         test.setPublish(true);
         testRepository.save(test);
+    }
+    public boolean isOwner(Long testId, String username){
+        Test test = testRepository.findById(testId).get();
+        if (test.getUser().getUsername().equals(username)) return true;
+        else return false;
+    }
+    public boolean isOwner(String username, Long questId){
+        Test test = questionRepository.findById(questId).get().getTest();
+        if (test.getUser().getUsername().equals(username)) return true;
+        else return false;
+    }
+    public void newResult(String username, Long testId, Long trueAns){
+        User user = userRepository.findByUsername(username);
+        Test test = testRepository.findById(testId).get();
+        Result result = new Result(trueAns,user,test);
+        resultRepository.save(result);
+       user.addResult(result);
+       test.addResult(result);
+        userRepository.save(user);
+        testRepository.save(test);
+
     }
 }

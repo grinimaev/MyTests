@@ -17,12 +17,17 @@ public class Test {
     private String name;
 
     private String description;
+
     private boolean publish;
+
     @ManyToOne
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Question> question;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Result> result;
 
     public Test(User user,String name, String description) {
         this.user = user;
@@ -81,5 +86,16 @@ public class Test {
 
     public void setPublish(boolean publish) {
         this.publish = publish;
+    }
+
+    public List<Result> getResult() {
+        return result;
+    }
+
+    public void setResult(List<Result> result) {
+        this.result = result;
+    }
+    public void addResult(Result result){
+        this.result.add(result);
     }
 }

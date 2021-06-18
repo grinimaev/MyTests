@@ -212,10 +212,11 @@ header a:hover{
     margin-left: 80px;
 }
 .underlinetxt:hover{
-    background-color: white ;
-    color: #2c3e50;
-    border-radius: 5px;
-    cursor: default;
+    color: white;
+    font-size: 15px;
+    width: 75px;
+    margin-top: 8px;
+    margin-left: 80px;
 }
 .forTable{
     margin-top: 80px;
@@ -306,7 +307,7 @@ header a:hover{
     background-color:white;
     color: #2c3e50;
 }
-#changeButt{
+.changeButt{
     font-size: 30px;
     margin-top: 15px;
     width: 219px;

@@ -16,7 +16,8 @@
 
 
   <header th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
-      <div id="myTest2"> <a href="/">MyTests</a></div>
+      <div id="myTest2"> <a href="/">MyTests</a>
+      <div class="underlinetxt">Пользователь</div></div>
       <div class="reg"> <a href="/">Тесты</a></div>
       <div class="reg"><a href="/profile">Профиль</a></div>
       <form class="form" th:action="@{/logout}" method="post">
@@ -27,7 +28,8 @@
   </header>
 
       <header th:if="${#authorization.expression('hasRole(''ROLE_TESTER'')')}">
-          <div id="myTest3"> <a href="/">MyTests</a></div>
+          <div id="myTest3"> <a href="/">MyTests</a>
+          <div class="underlinetxt">Тестировщик</div></div>
           <div class="reg"> <a href="/test/list">Мои тесты</a></div>
           <div class="reg"><a href="/profile">Профиль</a></div>
           <form class="form" th:action="@{/logout}" method="post">
@@ -39,7 +41,7 @@
 
       <header th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
           <div id="myTest4"> <a href="/">MyTests</a>
-          <div class="underlinetxt">Admin page</div></div>
+          <div class="underlinetxt">Администратор</div></div>
           <div class="reg"> <a href="/admin">Администрирование</a></div>
           <div class="reg"><a href="/profile">Профиль</a></div>
           <form class="form" th:action="@{/logout}" method="post">

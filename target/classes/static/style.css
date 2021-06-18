@@ -212,10 +212,11 @@ header a:hover{
     margin-left: 80px;
 }
 .underlinetxt:hover{
-    background-color: white ;
-    color: #2c3e50;
-    border-radius: 5px;
-    cursor: default;
+    color: white;
+    font-size: 15px;
+    width: 75px;
+    margin-top: 8px;
+    margin-left: 80px;
 }
 .forTable{
     margin-top: 80px;
@@ -306,7 +307,7 @@ header a:hover{
     background-color:white;
     color: #2c3e50;
 }
-#changeButt{
+.changeButt{
     font-size: 30px;
     margin-top: 15px;
     width: 219px;
@@ -322,6 +323,7 @@ header a:hover{
     font-size: 20px;
     padding: 5px 15px;
     border: 0px;
+    outline: none;
 }
 .testEdit{
     display: flex;
@@ -331,6 +333,7 @@ header a:hover{
 }
 .contentTest{
     width: 500px;
+    max-height: 500px;
     height: 275px;
     background-color: #2c3e50;
     color: white;
@@ -362,6 +365,125 @@ header a:hover{
 }
 .quests .forTable{
     margin-top: 0px;
+}
+/*Создать тест --------------------------------------------------*/
+.newTest .shapka{
+    margin-top: 30px;
+
+}
+.newTest form{
+    background-color: #2c3e50;
+    width: auto;
+    border-radius: 10px;
+}
+
+.formReg textarea{
+    width: 288px;
+    height:100px;
+    resize: none;
+    font-size: 20px;
+    padding: 5px 15px;
+    border: 2px solid #2c3e50;
+    border-radius: 10px;
+    margin-top: 30px;
+    outline: none;
+}
+.inputTest{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+.inputTest input{
+    width: 578px;
+    height: 40px;
+    text-align: center;
+    font-size: 20px;
+    border: 2px solid #2c3e50;
+    outline: none;
+    color: #2c3e50;
+    font-weight: bold;
+
+}
+#newQe{
+    width: 400px;
+}
+#answer .inputR{
+    display: flex;
+}
+#answer .switchRole{
+    margin-top: 70px;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+}
+#newQe .polya{
+    width: 400px;
+}
+#descripHead{
+    font-size: 40px;
+    height: auto;
+    margin-bottom: 25px;
+}
+.question{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+#NameHead{
+    font-size: 60px;
+}
+#tests .switchRole{
+    display: inline-block;
+    margin-left:20px;
+    margin-right: 20px;
+    width: 20px;
+    height: 20px;
+    margin-bottom: auto;
+    margin-top: auto;
+
+}
+.Answer{
+    display: flex;
+}
+.textAnsw{
+    font-size: 20px;
+    width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#tests .reginaBut{
+    margin-top: 0px;
+    width: 220px;
+
+}
+#tests #butt{
+    width: 220px;
+}
+#formAnswers{
+    width: 220px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    height: auto;
+}
+.publicBut a{
+    text-decoration: none;
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px ;
+    padding: 5px;
+}
+.publicBut a:hover{
+    background-color:white;
+    color: #2c3e50;
+}
+.publicBut{
+    width: 132px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+    margin-top: 20px;
+
 }
 
 

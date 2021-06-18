@@ -6,20 +6,38 @@
 </head>
 <body>
 <div th:replace="header :: content"></div>
-<form   th:action="@{/test/edit/newQuestion/{id}(id=${testid})}" method="post">
-  <div><textarea rows="3" cols="20" name="question" placeholder="Вопрос" required></textarea></div>
-  <div id="answer">
-  <div><textarea rows="3" cols="20" name="answer" placeholder="Ответ" required ></textarea><input  type="radio" checked="checked" name="trueAns" value="0" ></div>
-  <div><textarea rows="3" cols="20" name="answer" placeholder="Ответ" required></textarea><input  type="radio" name="trueAns" value="1"></div>
+<div class="regina">
+  <div class="textR">Новый вопрос</div>
+  <div class="contentR">
+    <form class="formReg" id = "newQe"th:action="@{/test/edit/newQuestion/{id}(id=${testid})}" method="post">
+      <div class="polya">
+        <div class="inputR"><textarea rows="3" cols="20" name="question" placeholder="Вопрос" required></textarea></div>
+        <div id="answer">
+          <div class="inputR"><textarea rows="3" cols="20" name="answer" placeholder="Ответ" required ></textarea><input class="switchRole"  type="radio" checked="checked" name="trueAns" value="0" ></div>
+          <div class="inputR"><textarea rows="3" cols="20" name="answer" placeholder="Ответ" required ></textarea><input class="switchRole" type="radio" checked="checked" name="trueAns" value="1" ></div>
+        </div>
+        <div class="reginaBut"> <input type="button" value="Новый ответ" onclick="addAnswer()"></div>
+        <div class="reginaBut"> <input type="submit" value="Сохранить"></div>
+      </div>
+
+    </form>
+
   </div>
-  <div> <input type="button" value="Добавить ответ" onclick="addAnswer()"></div>
-  <div> <input type="submit" value="Сохранить"></div>
-</form>
+
+</div>
+
+
+
+
+
+
+
+
 <script>
   let num=+2;
   function addAnswer(){
     let add= document.getElementById("answer");
-    add.innerHTML+="<div><textarea rows=\"3\" cols=\"20\" name=\"answer\" placeholder=\"Ответ\" required></textarea><input  type=\"radio\" name=\"trueAns\" value=\""+num+"\"></div>"
+    add.innerHTML+="<div class='inputR'><textarea rows=\"3\" cols=\"20\" name=\"answer\" placeholder=\"Ответ\" required></textarea><input class=\"switchRole\" type=\"radio\" name=\"trueAns\" value=\""+num+"\"></div>"
     num++;
   }
 </script>
